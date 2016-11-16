@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.xupt.mapper.UserMapper">
+    <!-- 添加个人办公机账号 -->
+    <insert id="userRegist" parameterType="User">
+        insert into stu_login(stu_num,sex,stu_phone,email,stu_passwd,stu_name,school_id,major,stu_nickname,head,signature,credibility,set_order,get_order) values(#{stu_num},#{sex},#{stu_phone},#{email},#{stu_passwd},#{stu_name},#{school_id},#{major},#{stu_nickname},#{head},#{signature},#{credibility},#{set_order},#{get_order});
+    </insert>
+</mapper>
+
