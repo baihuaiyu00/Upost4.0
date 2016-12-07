@@ -3,9 +3,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.xupt.mapper.UserMapper">
-    <!-- 添加个人办公机账号 -->
+
     <insert id="userRegist" parameterType="User">
-        insert into stu_login(stu_num,sex,stu_phone,email,stu_passwd,stu_name,school_id,major,stu_nickname,head,signature,credibility,set_order,get_order) values(#{stu_num},#{sex},#{stu_phone},#{email},#{stu_passwd},#{stu_name},#{school_id},#{major},#{stu_nickname},#{head},#{signature},#{credibility},#{set_order},#{get_order});
+--         insert into stu_login(stu_num,sex,stu_phone,email,stu_passwd,stu_name,school_id,major,stu_nickname,head,signature,credibility,set_order,get_order) values(#{stu_num},#{sex},#{stu_phone},#{email},#{stu_passwd},#{stu_name},#{school_id},#{major},#{stu_nickname},#{head},#{signature},#{credibility},#{set_order},#{get_order});
+         insert into stu_login(stu_num,stu_name,sex,stu_phone,email,stu_passwd,school_id,major,stu_nickname,head,signature,credibility,integral,set_order,get_order,stu_photo,iden_photo,audit_adm_id,audit_status)
+                       values(#{stu_num},#{stu_name},#{sex},#{stu_phone},#{email},#{stu_passwd},#{school_id},#{major},#{stu_nickname},#{head},#{signature},#{credibility},#{integral},#{set_order},#{get_order},#{stu_photo},#{iden_photo},#{audit_adm_id},#{audit_status});
     </insert>
 </mapper>
 

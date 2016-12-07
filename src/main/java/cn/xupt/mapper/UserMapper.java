@@ -2,6 +2,8 @@ package cn.xupt.mapper;
 
 import cn.xupt.entity.User;
 
+import java.util.List;
+
 /**
  * Created by Admin on 2016/11/11.
  */

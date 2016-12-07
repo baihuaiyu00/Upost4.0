@@ -20,6 +20,7 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     /**
+     *用户登录
      *
      * @param user 属性有学号与密码
      * @return 102 成功登录
@@ -52,6 +53,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String userRegist(User user) {
         try {
+
             userMapper.userRegist(user);
             System.out.println("execute serviceImpl!");
         }catch(Exception e){

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,31 +26,30 @@ public class ParcelController {
 
     @Autowired
     private ParcelService parcelService;
-
-    private String result;
-
-    @RequestMapping(value = "/{action}",method = RequestMethod.POST)
-    public void parcelInfoPublish(@PathVariable String action, HttpServletRequest request, HttpServletResponse response, @ModelAttribute Parcel parcel){
+    /**
+     *
+     * @param parcel_id
+     * @param request
+     * @param response
+     * @param parcel
+     * 需要传入的Bean中携带信息为：
+     * 快递公司（company），取件时间（？），发布人联系方式（通过set_stu_id获取联系方式？）
+     * 重量（weight），快递猿送件时间（？），快递猿送件地址（location_2_id）
+     * 物品类型（type），打赏小费（reward）
+     */
+    @RequestMapping(value = "/{parcel_id}",method = RequestMethod.POST)
+    public void parcelInfoPublish(@PathVariable String parcel_id, HttpServletRequest request, HttpServletResponse response, @ModelAttribute Parcel parcel){
         try {
+            System.out.println("kidding me?");
+            String result;
             request.setCharacterEncoding("utf-8");
             response.setContentType("text/html;charset=UTF-8");
-            switch (action) {
-                case "publish":{
-                    result = parcelService.parcelPub(parcel);
-                    break;
-                }
-            }
-
-
-
+            result = parcelService.parcelPub(parcel);
             PrintWriter out = response.getWriter();
             out.write(result);
-
-
+            DispatcherServlet;
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
 }

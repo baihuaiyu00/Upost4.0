@@ -1,24 +1,39 @@
 package cn.xupt.entity;
 
 
+import java.util.Date;
+
 /**
  * Created by Admin on 2016/11/14.
  */
 public class Parcel {
 
+    private String awb;
     private String set_stu_id;
-    private String localtion_1;
-    private String localtion_2;
+    private String location_1_id;
+    private String other_1;
+    private String location_2_id;
+    private String other_2;
     private String type;
     private String company;
     private double reward;
     private String create_time;
-    private String deadline;
     private String weight;
     private String size;
     private int par_status;
 
+    public Parcel(){
+        this.par_status = -1;
+        this.awb = String.valueOf(new Date().getTime());
+    }
 
+    public String getAwb() {
+        return awb;
+    }
+
+    public void setAwb(String awb) {
+        this.awb = awb;
+    }
 
     public String getSet_stu_id() {
         return set_stu_id;
@@ -28,20 +43,36 @@ public class Parcel {
         this.set_stu_id = set_stu_id;
     }
 
-    public String getLocaltion_1() {
-        return localtion_1;
+    public String getLocation_1_id() {
+        return location_1_id;
     }
 
-    public void setLocaltion_1(String localtion_1) {
-        this.localtion_1 = localtion_1;
+    public void setLocation_1_id(String location_1_id) {
+        this.location_1_id = location_1_id;
     }
 
-    public String getLocaltion_2() {
-        return localtion_2;
+    public String getOther_1() {
+        return other_1;
     }
 
-    public void setLocaltion_2(String localtion_2) {
-        this.localtion_2 = localtion_2;
+    public void setOther_1(String other_1) {
+        this.other_1 = other_1;
+    }
+
+    public String getLocation_2_id() {
+        return location_2_id;
+    }
+
+    public void setLocation_2_id(String location_2_id) {
+        this.location_2_id = location_2_id;
+    }
+
+    public String getOther_2() {
+        return other_2;
+    }
+
+    public void setOther_2(String other_2) {
+        this.other_2 = other_2;
     }
 
     public String getType() {
@@ -74,14 +105,6 @@ public class Parcel {
 
     public void setCreate_time(String create_time) {
         this.create_time = create_time;
-    }
-
-    public String getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(String deadline) {
-        this.deadline = deadline;
     }
 
     public String getWeight() {

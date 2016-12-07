@@ -2,7 +2,6 @@ package cn.xupt.controller;
 
 import cn.xupt.entity.User;
 import cn.xupt.service.UserService;
-import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +23,9 @@ public class UserController {
     private String result;
 
 
+    /**
+     * Autowried
+     */
     @Autowired
     private UserService userService;
 
@@ -52,6 +54,7 @@ public class UserController {
                     case "regist":{
                         System.out.println(user);
                         result = userService.userRegist(user);
+//                        HeadUploadUtil.upload(request,response);
                         System.out.println("execute regist controller!");
                         break;
                     }
@@ -76,8 +79,5 @@ public class UserController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
-
 }
