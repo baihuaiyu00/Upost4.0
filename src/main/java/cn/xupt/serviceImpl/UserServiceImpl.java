@@ -3,11 +3,10 @@ package cn.xupt.serviceImpl;
 import cn.xupt.entity.User;
 import cn.xupt.mapper.UserMapper;
 import cn.xupt.service.UserService;
+import cn.xupt.util.JSONCodeUtil;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.sql.SQLException;
 
 /**
  * Created by Admin on 2016/11/10.
@@ -22,30 +21,33 @@ public class UserServiceImpl implements UserService {
     /**
      *用户登录
      *
-     * @param user 属性有学号与密码
-     * @return 102 成功登录
+     * @param user 属性有手机号与密码
+     * @return 102 data 成功登录
      *         100 密码错误
      *         101 用户名不存在
      */
     @Override
     public String userLogin(User user) {
-        String stu_num = user.getStu_num();
+        String stu_phone = user.getStu_phone();
         String password = user.getStu_passwd();
-        String find_pwd = userMapper.userLogin(stu_num);
+        String find_pwd = userMapper.userLogin(stu_phone); //通过电话号码取得用户密码
 
-        if(find_pwd==null) return "101";
+        if(find_pwd==null) return JSONCodeUtil.setJSONCode(101); // not exist
+
         if(find_pwd.equals(password)) {
-            User new_user = userMapper.userInfoGet(stu_num);
-            String jsonString = JSON.toJSONString(new_user);
-            return jsonString;
-        }else{
-            return "100";
+            //return the User
+            User new_user = userMapper.userInfoGetByPn(stu_phone);
+            System.out.println(new_user);
+            return JSONCodeUtil.setJSONCode(102,new_user);
+
+        }else{// wrong password
+            return JSONCodeUtil.setJSONCode(100);
         }
 
     }
 
     /**
-     *
+     * 注册成功后返回一定需要的默认信息
      * @param user 用户注册Bean
      * @return 注册成功 102
      *         注册失败 101
@@ -53,34 +55,70 @@ public class UserServiceImpl implements UserService {
     @Override
     public String userRegist(User user) {
         try {
-
             userMapper.userRegist(user);
-            System.out.println("execute serviceImpl!");
+            System.out.println("execute regist serviceImpl!");
+            user.setStu_id(userMapper.userIdGet(user.getStu_phone()));
+            user.setStu_passwd(null);
         }catch(Exception e){
             e.printStackTrace();
-            return "101";
+            return JSONCodeUtil.setJSONCode(101);
         }
-    return "102";
+        //TODO
+//        注册成功是否返回一个"默认"的用户信息
+    return JSONCodeUtil.setJSONCode(102,user);
     }
 
     /**
      *
-     * @param user 用户信息完善
+     * @param stu_id 用户信息完善
      * @return 102 信息更新成功
      *         101 输入信息有误
      *         103 密码错误
      */
     @Override
-    public String userInfoComplete(User user) {
+    public String userInfoComplete(String stu_id) {
         try{
-            String find_pwd = userMapper.userLogin(user.getStu_num());
-            if(find_pwd==null) return "100";
-            userMapper.userInfoComplete(user);
+            userMapper.userInfoComplete(stu_id);
         }catch(Exception e){
             e.printStackTrace();
-            return "101";
+            return JSONCodeUtil.setJSONCode(101);
         }
-        return "102";
+        //TODO
+        //同上
+        return JSONCodeUtil.setJSONCode(102,userMapper.userInfoGet(stu_id));
+    }
+
+    /**
+     * get user infomation
+     * @param stu_id
+     * @return User user right success
+     *          101 wrong
+     */
+    @Override
+    public String userInfoGet(String stu_id) {
+        try {
+            User user = userMapper.userInfoGet(stu_id);
+            return JSONCodeUtil.setJSONCode(102,user);
+        }catch(Exception e ){
+            e.printStackTrace();
+            return JSONCodeUtil.setJSONCode(101);
+        }
+    }
+
+    /**
+     * get the user's stu_id from stu_phone
+     * @param stu_phone user's phone number
+     * @return 101 wrong
+     */
+    @Override
+    public String userIdGet(String stu_phone) {
+        try {
+            String stu_id = userMapper.userIdGet(stu_phone);
+            return stu_id;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

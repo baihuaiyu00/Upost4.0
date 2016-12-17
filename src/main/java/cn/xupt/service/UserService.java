@@ -13,6 +13,9 @@ public interface UserService {
 
     String userRegist(User user);
 
-    String userInfoComplete(User user);
+    String userInfoComplete(String stu_id);
 
+    String userInfoGet(String stu_id);
+
+    String userIdGet(String stu_phone);
 }

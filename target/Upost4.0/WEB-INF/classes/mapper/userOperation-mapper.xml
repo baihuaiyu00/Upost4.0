@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.xupt.mapper.UserMapper">
+    <select id="userLogin" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT stu_passwd FROM stu_login WHERE stu_phone = #{stu_phone};
+    </select>
+
+    <insert id="userRegist" parameterType="User">
+        insert into stu_login(stu_num,stu_name,sex,stu_phone,email,stu_passwd,school_id,major,stu_nickname,head,signature,credibility,integral,set_order,get_order,stu_photo,iden_photo,audit_adm_id,audit_status)values(#{stu_num},#{stu_name},#{sex},#{stu_phone},#{email},#{stu_passwd},#{school_id},#{major},#{stu_nickname},#{head},#{signature},#{credibility},#{integral},#{set_order},#{get_order},#{stu_photo},#{iden_photo},#{audit_adm_id},#{audit_status});
+    </insert>
+
+    <select id="userInfoGet" parameterType="java.lang.String" resultType="User">
+        SELECT stu_id,stu_num,sex,stu_phone,email,stu_passwd,stu_name,school_id,major,stu_nickname,head,signature,credibility,set_order,get_order FROM stu_login WHERE stu_id = #{stu_id};
+    </select>
+
+    <select id="userInfoGetByPn" parameterType="java.lang.String" resultType="User">
+        SELECT stu_id,stu_num,sex,stu_phone,email,stu_passwd,stu_name,school_id,major,stu_nickname,head,signature,credibility,set_order,get_order FROM stu_login WHERE stu_phone = #{stu_phone};
+    </select>
+
+    <update id="userInfoComplete" parameterType="java.lang.String">
+        UPDATE stu_login SET school_id = #{school_id},major = #{major},stu_nickname = #{stu_nickname},head = #{head},signature = #{signature} WHERE stu_id = #{stu_id};
+    </update>
+    
+    <select id="userIdGet" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT stu_id FROM stu_login where stu_phone = #{stu_phone};
+    </select>
+
+    <select id="userNameGet" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT stu_name FROM stu_login WHERE stu_id = #{stu_id};
+    </select>
+</mapper>
+

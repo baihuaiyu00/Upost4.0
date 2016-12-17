@@ -30,6 +30,7 @@ public class AdminController {
             PrintWriter out = response.getWriter();
             String result = adminService.AdminLogin(admin);
             out.write(result);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

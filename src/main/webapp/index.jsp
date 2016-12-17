@@ -5,15 +5,13 @@
     <title>Test page</title>
 </head>
 <body>
-    <form method="post" action="user/login">
-        stu_num:<input type="text" name="stu_num"><br/>
-        <%--sex:<input type="text" name="sex"><br/>--%>
-        <%--stu_phone:<input type="text" name="stu_phone"><br/>--%>
-        <%--email:<input type="text" name="email"><br/>--%>
-        stu_passwd:<input type="password" name="stu_passwd"><br/>
-        <%--stu_name:<input type="text" name="stu_name"><br/>--%>
-        <%--school_id:<input type="text" name="school_id"><br/>--%>
-        <input type="submit" value="login"><br/>
-    </form>
+<form method="post" action="pro/submit">
+    ask_stu_id:<input type="text" name="ask_stu_id"><br/>
+    problem_info:<input type="text" name="problem_info"><br/>
+    <%--stu_passwd:<input type="password" name="stu_passwd"><br/>--%>
+    <%--stu_name:<input type="text" name="stu_name"><br/>--%>
+    <%--school_id:<input type="text" name="school_id"><br/>--%>
+    <input type="submit" value="login"><br/>
+</form>
 </body>
 </html>

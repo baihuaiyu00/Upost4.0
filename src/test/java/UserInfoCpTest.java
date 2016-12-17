@@ -19,8 +19,8 @@ public class UserInfoCpTest {
         u.setMajor("computer science");
         u.setStu_nickname("Bob");
         u.setStu_num("12333");
-        userService.userInfoComplete(u);
-        userMapper.userInfoComplete(u);
+//        userService.userInfoComplete(u);
+//        userMapper.userInfoComplete(u);
     }
 
 }

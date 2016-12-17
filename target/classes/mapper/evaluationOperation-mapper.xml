@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.xupt.mapper.EvalMapper">
+
+    <insert id="evalCreate" parameterType="Evaluation">
+        INSERT INTO evaluation (belong_order_id,speed,service,appearance,whether,eval_context) VALUES (#{belong_order_id},#{speed},#{service},#{appearance},#{whether},#{eval_context});
+    </insert>
+    
+    <select id="evalGet" parameterType="java.lang.String" resultType="Evaluation">
+        SELECT eval_id,eval_time,speed,service,appearance,whether,eval_context FROM evaluation where belong_order_id = #{order_id};
+    </select>
+
+</mapper>
+

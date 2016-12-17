@@ -1,6 +1,7 @@
 package cn.xupt.mapper;
 
 import cn.xupt.entity.Order;
+import cn.xupt.entity.OrderDetail;
 import cn.xupt.entity.Parcel;
 
 /**
@@ -8,7 +9,9 @@ import cn.xupt.entity.Parcel;
  */
 public interface OrderMapper extends SqlMapper{
 
-    String orderCreate(Parcel parcel);
+    void orderCreate(Order order);
 
-    void orderAccept(Order order);
+    void orderStatusUpdate(String order_id, String orderStatus);
+
+    OrderDetail orderInfoGet(String order_id);
 }

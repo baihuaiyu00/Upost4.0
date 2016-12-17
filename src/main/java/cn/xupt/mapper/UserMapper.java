@@ -9,14 +9,17 @@ import java.util.List;
  */
 public interface UserMapper extends SqlMapper {
 
-    String userLogin(String stu_num);
+    String userLogin(String stu_phone);
 
     void userRegist(User user);
 
-    void userInfoComplete(User user);
+    void userInfoComplete(String stu_id);
 
-    User userInfoGet(String stu_num);
+    User userInfoGet(String stu_id);
 
+    User userInfoGetByPn(String stu_phone);
 
+    String userIdGet(String stu_phone);
 
+    String userNameGet(String stu_id);
 }

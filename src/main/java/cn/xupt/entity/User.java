@@ -10,25 +10,31 @@ package cn.xupt.entity;
     public class User {
 
         public User(){
-            this.school_id = "1";
-            this.major = "some major";
-            this.head = "path";
-            this.stu_nickname = "someone";
-            this.signature = "this user is suck";
-            this.credibility = "100";
-            this.set_order = "0";
-            this.get_order = "0";
-            this.stu_photo = "none";
-            this.iden_photo = "none";
-            this.audit_adm_id = "0";
+            this.stu_num = "default";
+//            this.stu_name = "default";
+            this.school_id = "default";
+//            this.major = "default";
+//            this.head = "default";
+//            this.email = "default";
+//            this.stu_nickname = "default";
+//            this.signature = "default";
+//            this.credibility = "100";
+//            this.set_order = "0";
+//            this.integral = "0";
+//            this.get_order = "0";
+//            this.stu_photo = "default";
+//            this.iden_photo = "default";
+//            this.audit_adm_id = "0";
             this.audit_status = "-1";
+//            this.sex = "default";
         }
-
+    private String stu_id;
     private String stu_num;
     private String stu_name;
+    private String sex;
     private String stu_phone;
-    private String stu_passwd;
     private String email;
+    private String stu_passwd;
     private String school_id;
     private String major;
     private String stu_nickname;
@@ -36,7 +42,6 @@ package cn.xupt.entity;
     private String signature;
     private String credibility;
     private String integral;
-    private String sex;
     private String set_order;
     private String get_order;
     private String stu_photo;
@@ -67,6 +72,14 @@ package cn.xupt.entity;
                 ", audit_adm_id='" + audit_adm_id + '\'' +
                 ", audit_status='" + audit_status + '\'' +
                 '}';
+    }
+
+    public String getStu_id() {
+        return stu_id;
+    }
+
+    public void setStu_id(String stu_id) {
+        this.stu_id = stu_id;
     }
 
     public String getSet_order() {

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.xupt.mapper.LocationMapper">
+    <select id="locationGet" parameterType="java.lang.String" resultType="Location">
+        SELECT location_type,use_time,location_txt FROM location_info WHERE belong_stu_id = #{belong_stu_id};
+    </select>
+
+    <insert id="locationSet" parameterType="Location">
+        insert into location_info(belong_stu_id,location_type,use_time,location_txt) VALUES (#{belong_stu_id},#{location_type},#{use_time},#{location_txt});
+    </insert>
+
+
+</mapper>
+

@@ -8,14 +8,25 @@ public class Order {
     private String order_id;
     private String get_stu_id;
     private String parcel_id;
-    private long receive_time;
+    private String receive_time;
     private String order_status;
 
     public Order(){
         this.get_stu_id = "-1";
         this.parcel_id = "0";
-        this.receive_time = -1;
+        this.receive_time = "-1";
         this.order_id = "-2";
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "order_id='" + order_id + '\'' +
+                ", get_stu_id='" + get_stu_id + '\'' +
+                ", parcel_id='" + parcel_id + '\'' +
+                ", receive_time='" + receive_time + '\'' +
+                ", order_status='" + order_status + '\'' +
+                '}';
     }
 
     public String getOrder_id() {
@@ -42,11 +53,11 @@ public class Order {
         this.parcel_id = parcel_id;
     }
 
-    public long getReceive_time() {
+    public String getReceive_time() {
         return receive_time;
     }
 
-    public void setReceive_time(long receive_time) {
+    public void setReceive_time(String receive_time) {
         this.receive_time = receive_time;
     }
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.xupt.mapper.ProMapper">
+
+    <insert id="proSubmit" parameterType="Problem">
+        insert into problem(ask_stu_id,problem_info,pr_status)VALUES (#{ask_stu_id},#{problem_info},-1);
+    </insert>
+
+    <update id="proDeal" parameterType="Problem">
+        UPDATE problem SET deal_people_id = #{deal_people_id},pr_status = 0;
+    </update>
+
+    <select id="proListGet" resultType="Problem">
+--         SELECT p.problem_id,s.stu_name,p.problem_info from problem p,stu_login s WHERE p.ask_stu_id = s.stu_id and pr_status = -1;
+        SELECT problem_id,ask_stu_id,problem_info,pr_status from problem where pr_status = -1;
+    </select>
+
+
+</mapper>
+

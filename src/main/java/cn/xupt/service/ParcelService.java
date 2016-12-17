@@ -12,4 +12,9 @@ public interface ParcelService {
 
     String parcelPub(Parcel parcel);
 
+    String parcelListGet();
+
+    String parcelCancel(String parcel_id);
+
+    String parcelInfoGet(String parcel_id);
 }

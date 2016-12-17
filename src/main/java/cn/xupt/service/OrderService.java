@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 public interface OrderService {
 
-    void orderAccept(Order order);
 
+    String orderCreate(Order order);
+
+    String orderStatusUpdate(String order_id, String orderStatus);
+
+    String orderInfoGet(String order_id);
 }
