@@ -80,6 +80,12 @@ public class OrderController {
         }
     }
 
+    /**
+     * 订单信息获取接口
+     * @param order_id
+     * @param request
+     * @param response
+     */
     @RequestMapping(value = "/{order_id}",method = RequestMethod.GET)
     public void orderInfoGet(@PathVariable String order_id,HttpServletRequest request,HttpServletResponse response)
     {
@@ -91,6 +97,38 @@ public class OrderController {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 订单（order）列表获取
+     * @param request
+     * @param response
+     */
+    @RequestMapping(value = "/list",method = RequestMethod.POST)
+    public void orderListGet(HttpServletRequest request,HttpServletResponse response){
+        try {
+            String result, type = "-1";
+            if (request.getParameter("type") != null)
+                type = request.getParameter("type");
+            result = orderService.orderListGet(type);
+            PrintWriter out = response.getWriter();
+            out.write(result);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    @RequestMapping(value = "/infolist/{stu_id}",method = RequestMethod.GET)
+    public void orderInfoListGet(@PathVariable String stu_id,HttpServletRequest request,HttpServletResponse response) {
+        try {
+            String result = orderService.orderInfoListGet(stu_id);
+            PrintWriter out = response.getWriter();
+            out.write(result);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 }

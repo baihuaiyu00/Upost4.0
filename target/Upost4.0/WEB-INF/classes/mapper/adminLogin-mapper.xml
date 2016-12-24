@@ -6,6 +6,18 @@
     <select id="adminLogin" parameterType="java.lang.String" resultType="java.lang.String">
         SELECT adm_passwd FROM admin_login WHERE adm_email = #{adm_email};
     </select>
+
+    <select id = "findUnCheckingUser" parameterType="java.lang.String" resultType="User">
+         SELECT stu_num,stu_name,sex,stu_phone,email,stu_passwd,school_id,major,stu_nickname,head,signature,credibility,integral,set_order,get_order,stu_photo,iden_photo,audit_status FROM stu_login WHERE audit_status = #{audit_status};
+    </select>
+
+    <update id = "passUser" parameterType="java.lang.String">
+            update stu_login set audit_status = 1 where stu_num = #{stu_num}
+    </update>
+
+    <update id = "unpassUser" parameterType="java.lang.String">
+        update stu_login set audit_status = -1 where stu_num = #{stu_num}
+    </update>
 </mapper>
 
 

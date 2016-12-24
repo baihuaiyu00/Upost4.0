@@ -8,16 +8,27 @@
         insert into parcel_inform (set_stu_id,take_name,take_phone,location_1,location_2,type,reward,create_time,size,urgent,start_time,end_time,note,par_status) VALUES (#{set_stu_id},#{take_name},#{take_phone},#{location_1},#{location_2},#{type},#{reward},#{create_time},#{size},#{urgent},#{start_time},#{end_time},#{note},#{par_status});
     </insert>
 
+    <!--获取自己的订单列表根据set_stu_id-->
     <select id="parcelGet" parameterType="java.lang.String" resultType="Parcel">
-        SELECT location_1,location_2,start_time,end_time,urgent,reward,note FROM parcel_inform where set_stu_id = #{set_stu_id};
+        SELECT parcel_id,location_1,location_2,start_time,end_time,urgent,reward,note FROM parcel_inform where set_stu_id = #{set_stu_id};
     </select>
 
-    <select id="parcelListGet" resultType="Parcel">
-        SELECT set_stu_id,location_1,location_2,start_time,end_time,urgent,reward,note FROM parcel_inform;
+    <!--抢单的时候的所有订单获取 部分信息GET-->
+    <select id="parcelListGet" parameterType="java.lang.String" resultType="Parcel">
+        SELECT parcel_id,set_stu_id,location_1,location_2,start_time,end_time,urgent,reward,note FROM parcel_inform ORDER BY ${param1} ${param2} limit ${param3},${param4};
     </select>
 
     <select id="parcelInfoGet" parameterType="java.lang.String" resultType="Parcel">
         SELECT set_stu_id,take_name,take_phone,size,type,location_1,location_2,start_time,end_time,urgent,reward,note from parcel_inform where parcel_id = #{parcel_id};
     </select>
+
+    <select id="parcelInfoListGet" parameterType="java.lang.String" resultType="ParcelInfo">
+        SELECT parcel_id,location_1,location_2,create_time,start_time,end_time,par_status FROM parcel_inform WHERE set_stu_id = #{stu_id}
+    </select>
+
+    <update id="parcelStatusSet" parameterType="java.lang.String">
+        UPDATE parcel_inform set par_status = #{0} WHERE parcel_id = #{1};
+    </update>
+
 </mapper>
 

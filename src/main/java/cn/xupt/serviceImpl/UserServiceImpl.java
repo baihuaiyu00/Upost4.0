@@ -1,12 +1,16 @@
 package cn.xupt.serviceImpl;
 
+import cn.xupt.entity.Integral;
 import cn.xupt.entity.User;
 import cn.xupt.mapper.UserMapper;
 import cn.xupt.service.UserService;
 import cn.xupt.util.JSONCodeUtil;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by Admin on 2016/11/10.
@@ -79,13 +83,16 @@ public class UserServiceImpl implements UserService {
     public String userInfoComplete(String stu_id) {
         try{
             userMapper.userInfoComplete(stu_id);
+            System.out.println("success");
+            User return_user = userMapper.userInfoGet(stu_id);
+            return JSONCodeUtil.setJSONCode(102,return_user);
         }catch(Exception e){
             e.printStackTrace();
+            System.out.println("failed");
             return JSONCodeUtil.setJSONCode(101);
+
         }
-        //TODO
-        //同上
-        return JSONCodeUtil.setJSONCode(102,userMapper.userInfoGet(stu_id));
+
     }
 
     /**
@@ -98,6 +105,8 @@ public class UserServiceImpl implements UserService {
     public String userInfoGet(String stu_id) {
         try {
             User user = userMapper.userInfoGet(stu_id);
+            if(user == null)
+                return JSONCodeUtil.setJSONCode(101);
             return JSONCodeUtil.setJSONCode(102,user);
         }catch(Exception e ){
             e.printStackTrace();
@@ -118,6 +127,39 @@ public class UserServiceImpl implements UserService {
         }catch(Exception e){
             e.printStackTrace();
             return null;
+        }
+    }
+
+    /**
+     *
+     * @param stu_id
+     * @return 100 not exist 101 error 102 success
+     */
+    @Override
+    public String userIntegralGet(String stu_id) {
+        try {
+            String integral = userMapper.userIntegralGet(stu_id);
+            JSONObject obj = new JSONObject();
+            obj.put("integral",integral);
+            if (integral == null)
+                return JSONCodeUtil.setJSONCode(100);
+            return JSONCodeUtil.setJSONCode(102, obj);
+        }catch(Exception e){
+            e.printStackTrace();
+            return JSONCodeUtil.setJSONCode(101);
+        }
+    }
+
+    @Override
+    public String integralListGet() {
+        try {
+            List<Integral> list = userMapper.integralListGet();
+            if (list == null)
+                return JSONCodeUtil.setJSONCode(101);
+            return JSONCodeUtil.setJSONCode(102, list);
+        }catch(Exception e){
+            e.printStackTrace();
+            return JSONCodeUtil.setJSONCode(101);
         }
     }
 

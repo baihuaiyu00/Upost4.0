@@ -1,10 +1,13 @@
 package cn.xupt.serviceImpl;
 
 import cn.xupt.entity.Admin;
+import cn.xupt.entity.User;
 import cn.xupt.mapper.AdminMapper;
 import cn.xupt.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 /**
  * Created by Admin on 2016/12/5.
@@ -29,5 +32,22 @@ public class AdminServiceImpl implements AdminService {
             return "102";
         }
         return "100";
+    }
+
+    @Override
+    public void passUser(String stu_num) {
+        adminLoginMapper.passUser(stu_num);
+    }
+
+    @Override
+    public void unpassUser(String stu_num) {
+        adminLoginMapper.unpassUser(stu_num);
+    }
+
+    @Override
+    public ArrayList<User> findUnCheckingUser(int state) {
+        ArrayList<User> user = new ArrayList<User>();
+        user = adminLoginMapper.findUnCheckingUser(state);
+        return user;
     }
 }

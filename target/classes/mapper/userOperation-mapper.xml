@@ -30,5 +30,17 @@
     <select id="userNameGet" parameterType="java.lang.String" resultType="java.lang.String">
         SELECT stu_name FROM stu_login WHERE stu_id = #{stu_id};
     </select>
+
+    <select id="userIntegralGet" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT integral FROM stu_login where stu_id = #{stu_id};
+    </select>
+    
+    <select id="integralListGet" resultType="Integral">
+        SELECT stu_name,integral FROM stu_login ORDER BY integral desc limit 20;
+    </select>
+    
+    <select id="userNicknameGet" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT stu_nickname FROM stu_login WHERE stu_id = #{stu_id};
+    </select>
 </mapper>
 

@@ -70,7 +70,7 @@ public class UserController {
      * @param request 请求对象
      * @param response 响应对象
      */
-    @RequestMapping(value = "/{stu_id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{stu_id}/info", method = RequestMethod.PUT)
     public void userInfoComp(@PathVariable String stu_id, HttpServletRequest request, HttpServletResponse response) {
         try {
             String result;
@@ -79,6 +79,7 @@ public class UserController {
             // 此处需要注意，原来URI参数为stu_phone，后修改为直接传输stu_id；
             // 从传输一整个User对象，修改为传输stu_id字符串
 //            user.setStu_id(stu_id);
+            System.out.println(stu_id);
             result = userService.userInfoComplete(stu_id);
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
@@ -91,18 +92,14 @@ public class UserController {
     /**
      * 用户信息获取控制器，通过秘钥判断是否权限正确
      * @param stu_id student phone number
-     * @param key the public key
      * @param request httprequest
      * @param response httpresponse
      */
-    @RequestMapping(value = "/{stu_id}",method = RequestMethod.POST)
-    public void userInfoGet(@PathVariable String stu_id,@ModelAttribute String key,HttpServletRequest request,HttpServletResponse response){
+    @RequestMapping(value = "/{stu_id}/info",method = RequestMethod.GET)
+    public void userInfoGet(@PathVariable String stu_id,HttpServletRequest request,HttpServletResponse response){
         PrintWriter out;
         try{
             out = response.getWriter();
-            if(!key.equals("123456")){
-                out.write(JSONCodeUtil.setJSONCode(101));
-            }
             request.setCharacterEncoding("utf-8");
             String result = userService.userInfoGet(stu_id);
             // update 2016-12-15
@@ -110,6 +107,30 @@ public class UserController {
 //            String result = userService.userInfoGet(stu_phone);
             out.write(result);
         }catch(IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    @RequestMapping(value = "/{stu_id}/integral",method = RequestMethod.GET)
+    public void userIntegralGet(@PathVariable String stu_id,HttpServletRequest request,HttpServletResponse response)
+    {
+        try {
+            PrintWriter out = response.getWriter();
+            String result = userService.userIntegralGet(stu_id);
+            out.write(result);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping(value = "/integral_list",method = RequestMethod.GET)
+    public void integralListGet(HttpServletRequest request,HttpServletResponse response){
+        try {
+            String result = userService.integralListGet();
+            PrintWriter out = response.getWriter();
+            out.write(result);
+        }catch(Exception e){
             e.printStackTrace();
         }
 

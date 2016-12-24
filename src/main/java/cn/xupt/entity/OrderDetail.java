@@ -9,6 +9,8 @@ public class OrderDetail {
     private String set_stu_id;
     private String get_stu_id;
     private String size;
+    private String type;
+    private String urgent;
     private String start_time;
     private String end_time;
     private String receive_time;
@@ -16,9 +18,43 @@ public class OrderDetail {
     private String location_1;
     private String location_2;
     private String create_time;
-
     private String take_name;
-    private String take_time;
+    private String take_phone;
+    private String note;
+    private String order_status;
+
+
+    public String getOrder_status() {
+        return order_status;
+    }
+
+    public void setOrder_status(String order_status) {
+        this.order_status = order_status;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getUrgent() {
+        return urgent;
+    }
+
+    public void setUrgent(String urgent) {
+        this.urgent = urgent;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getTake_name() {
         return take_name;
@@ -28,12 +64,12 @@ public class OrderDetail {
         this.take_name = take_name;
     }
 
-    public String getTake_time() {
-        return take_time;
+    public String getTake_phone() {
+        return take_phone;
     }
 
-    public void setTake_time(String take_time) {
-        this.take_time = take_time;
+    public void setTake_phone(String take_phone) {
+        this.take_phone = take_phone;
     }
 
     public String getOrder_id() {

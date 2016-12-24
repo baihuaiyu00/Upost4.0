@@ -15,5 +15,18 @@
     <select id="orderInfoGet" parameterType="java.lang.String" resultType="OrderDetail">
         Select p.take_name,p.take_phone,o.get_stu_id,o.receive_time,p.set_stu_id,p.size,p.start_time,p.end_time,p.reward,p.location_1,p.location_2,p.create_time FROM orders o,parcel_inform p where p.parcel_id = o.parcel_id and o.order_id = #{order_id};
     </select>
+
+    <select id="orderListGet" parameterType="java.lang.String" resultType="OrderDetail">
+        SELECT o.order_id,o.receive_time,o.get_stu_id,p.set_stu_id,p.take_name,p.take_phone,p.location_1,p.location_2,p.type,p.reward,p.create_time,p.size,p.urgent,p.start_time,p.end_time,p.note FROM orders o,parcel_inform p WHERE p.parcel_id = o.parcel_id and order_status = #{type};
+    </select>
+    
+    <select id="orderInfo" parameterType="java.lang.String" resultType="OrderDetail">
+        SELECT receive_time,order_status FROM orders WHERE parcel_id = #{parcel_id};
+    </select>
+
+    <select id="orderInfoListGet" parameterType="java.lang.String" resultType="ParcelInfo">
+        SELECT p.parcel_id,o.order_id,p.location_1,p.location_2,p.create_time,p.start_time,p.end_time,o.receive_time,o.order_status FROM orders o,parcel_inform p WHERE o.get_stu_id = #{stu_id} and o.parcel_id = p.parcel_id;
+    </select>
+
 </mapper>
 

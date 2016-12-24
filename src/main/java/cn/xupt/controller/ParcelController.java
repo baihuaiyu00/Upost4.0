@@ -50,16 +50,34 @@ public class ParcelController {
     }
 
     /**
-     *  获取发布好的订单列表
+     *  获取发布好的订单列表展示信息供包裹侠抢单
+     *
+     *  “抢单”页面显示的信息
+     *
      * @param request httpRequest
      * @param response HttpResponse
+     *
+     *                 需要四个参数：sort：排序的索引项
+     *                             sort_type：正序或者倒序
+     *                             start：从第几项开始返回
+     *                             amount：返回多少条记录
      */
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @RequestMapping(value = "/list",method = RequestMethod.POST)
     public void parcelListGet(HttpServletRequest request,HttpServletResponse response){
         try {
-            String result;
-            request.setCharacterEncoding("utf-8");
-            result = parcelService.parcelListGet();
+            //
+            String a,b,c,d;
+            String result,sort = "parcel_id",sort_type = "desc",start = "0",amount = "10";
+            if((a = request.getParameter("sort"))!=null)
+                sort = a;
+            if((b = request.getParameter("sort_type"))!=null)
+                sort_type = b;
+            if((c = request.getParameter("start"))!=null)
+                start = c;
+            if((d = request.getParameter("amount"))!=null)
+                amount = d;
+
+            result = parcelService.parcelListGet(sort,sort_type,start,amount);
             PrintWriter out = response.getWriter();
             out.write(result);
         }catch(Exception e){
@@ -88,7 +106,6 @@ public class ParcelController {
 
     /**
      * 此接口原本准备用于接单后详细信息的返回，但是现在准备在Order里面写，所以暂时不用！！！！！！！！
-     * @param parcel_id
      * @param request
      * @param response
      */
@@ -103,4 +120,20 @@ public class ParcelController {
 //            e.printStackTrace();
 //        }
 //    }
+
+    /**
+     * 查看自己发布的订单信息
+     * @param request
+     * @param response
+     */
+    @RequestMapping(value = "/infolist/{stu_id}",method = RequestMethod.GET)
+    public void parcelInfoList(@PathVariable String stu_id,HttpServletRequest request,HttpServletResponse response){
+        try {
+            String result = parcelService.parcelInfoListGet(stu_id);
+            PrintWriter out = response.getWriter();
+            out.write(result);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }

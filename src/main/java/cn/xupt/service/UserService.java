@@ -18,4 +18,9 @@ public interface UserService {
     String userInfoGet(String stu_id);
 
     String userIdGet(String stu_phone);
+
+    String userIntegralGet(String stu_id);
+
+    String integralListGet();
+
 }

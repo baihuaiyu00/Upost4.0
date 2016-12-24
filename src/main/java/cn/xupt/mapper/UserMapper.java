@@ -1,5 +1,6 @@
 package cn.xupt.mapper;
 
+import cn.xupt.entity.Integral;
 import cn.xupt.entity.User;
 
 import java.util.List;
@@ -22,4 +23,10 @@ public interface UserMapper extends SqlMapper {
     String userIdGet(String stu_phone);
 
     String userNameGet(String stu_id);
+
+    String userIntegralGet(String stu_id);
+
+    List<Integral> integralListGet();
+
+    String userNicknameGet(String stu_id);
 }
